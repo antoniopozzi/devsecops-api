@@ -31,12 +31,3 @@ jobs:
 
       - name: Dependency vulnerability check
         run: dotnet list package --vulnerable --include-transitive
-
-      - name: Publish application
-        run: dotnet publish src/DevSecOps.Api/DevSecOps.Api.csproj --configuration Release --output ./publish
-
-      - name: Upload deployment artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: devsecops-api-publish
-          path: ./publish

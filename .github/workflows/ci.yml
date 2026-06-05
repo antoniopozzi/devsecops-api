@@ -1,4 +1,4 @@
-nome: ci
+name: ci
 
 on:
   push:
@@ -11,23 +11,23 @@ jobs:
   build-test-security:
     runs-on: ubuntu-24.04
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v6
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
 
-  - name: Setup .NET SDK
-    uses: actions/setup-dotnet@v5
-    with:
-      dotnet-version: '10.0.x'
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
 
-  - name: Restore dependencies
-    run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
 
-  - name: Build
-    run: dotnet build --configuration Release --no-restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-  - name: Test
-    run: dotnet test --configuration Release --no-build --verbosity normal
+      - name: Test
+        run: dotnet test --configuration Release --no-build --verbosity normal
 
-  - name: Dependency vulnerability check
-    run: dotnet list package --vulnerable --include-transitive
+      - name: Dependency vulnerability check
+        run: dotnet list package --vulnerable --include-transitive
